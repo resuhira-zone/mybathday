@@ -1,0 +1,1059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>birthday </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset & Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #333;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            padding: 30px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px dashed #6a11cb;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            color: #6a11cb;
+            margin-bottom: 10px;
+            font-family: 'Dancing Script', cursive;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .locker-container {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        /* Locker Styles */
+        .locker {
+            position: relative;
+            width: 280px;
+            height: 350px;
+            margin-bottom: 30px;
+            perspective: 1000px;
+        }
+
+        .locker-body {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #8B7355, #654321);
+            border-radius: 15px;
+            box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.5),
+                        0 10px 30px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+            z-index: 2;
+        }
+
+        .locker-door {
+            position: absolute;
+            width: 90%;
+            height: 85%;
+            background: linear-gradient(to bottom, #D2B48C, #8B7355);
+            border-radius: 10px;
+            top: 5%;
+            left: 5%;
+            transition: transform 1.5s ease;
+            transform-origin: left;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .locker-door.open {
+            transform: rotateY(-100deg);
+        }
+
+        .locker-handle {
+            position: absolute;
+            width: 40px;
+            height: 15px;
+            background: #FFD700;
+            border-radius: 5px;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .locker-lock {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background: #FFD700;
+            border-radius: 50%;
+            top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .lock-hole {
+            width: 15px;
+            height: 15px;
+            background: #333;
+            border-radius: 50%;
+            margin-bottom: 5px;
+        }
+
+        .lock-body {
+            width: 30px;
+            height: 20px;
+            background: #333;
+            border-radius: 5px;
+        }
+
+        .locker-code-display {
+            width: 180px;
+            height: 60px;
+            background: #111;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            font-size: 2.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            margin-top: 120px;
+            letter-spacing: 10px;
+            text-shadow: 0 0 5px #0f0;
+            box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.3);
+            padding-left: 10px;
+        }
+
+        .locker-base {
+            position: absolute;
+            width: 120%;
+            height: 20px;
+            background: #333;
+            bottom: -10px;
+            left: -10%;
+            border-radius: 5px;
+            z-index: 1;
+        }
+
+        .locker-shadow {
+            position: absolute;
+            width: 100%;
+            height: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            bottom: -10px;
+            left: 0;
+            z-index: 1;
+        }
+
+        /* Gift Box */
+        .gift-box {
+            position: absolute;
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            z-index: 1;
+            transition: transform 1s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gift-box.revealed {
+            transform: translate(-50%, -50%) scale(1);
+            z-index: 3;
+        }
+
+        .gift-lid {
+            width: 210px;
+            height: 50px;
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            border-radius: 10px 10px 0 0;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .gift-body {
+            width: 200px;
+            height: 150px;
+            background: linear-gradient(to right, #36D1DC, #5B86E5);
+            border-radius: 0 0 10px 10px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .gift-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.3) 10px, rgba(255,255,255,0.3) 20px);
+        }
+
+        .gift-bow {
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 40px;
+            z-index: 3;
+        }
+
+        .bow-center {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            background: #ffcc00;
+            border-radius: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+        }
+
+        .bow-loop {
+            position: absolute;
+            width: 40px;
+            height: 60px;
+            background: #ff3333;
+            border-radius: 50%;
+            top: -10px;
+        }
+
+        .bow-left {
+            left: 0;
+            transform: rotate(-30deg);
+        }
+
+        .bow-right {
+            right: 0;
+            transform: rotate(30deg);
+        }
+
+        .bow-tail {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            background: #ff3333;
+            top: 30px;
+        }
+
+        .bow-tail-left {
+            left: -40px;
+            transform: rotate(30deg);
+            border-radius: 50% 0 0 50%;
+        }
+
+        .bow-tail-right {
+            right: -40px;
+            transform: rotate(-30deg);
+            border-radius: 0 50% 50% 0;
+        }
+
+        .gift-message {
+            position: absolute;
+            top: 220px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .gift-box.revealed .gift-message {
+            opacity: 1;
+            transform: translateY(0);
+            transition-delay: 0.5s;
+        }
+
+        .gift-message h3 {
+            color: #ff416c;
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .gift-message p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .reset-btn {
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(106, 17, 203, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin: 0 auto;
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(106, 17, 203, 0.4);
+        }
+
+        .reset-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* Keypad Container */
+        .keypad-container {
+            flex: 1;
+            min-width: 300px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .keypad-container h3 {
+            color: #6a11cb;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .hint {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #e9ecef;
+            border-radius: 8px;
+            border-left: 4px solid #6a11cb;
+        }
+
+        /* Keypad */
+        .keypad {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .key-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+
+        .key {
+            flex: 1;
+            height: 70px;
+            border: none;
+            background: linear-gradient(to bottom, #fff, #f1f3f4);
+            border-radius: 10px;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 5px 0 #ddd, 0 8px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .key:hover {
+            background: linear-gradient(to bottom, #f1f3f4, #e8eaed);
+            transform: translateY(-2px);
+        }
+
+        .key:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #ddd, 0 5px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .key.backspace {
+            background: linear-gradient(to bottom, #ff9966, #ff5e62);
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .key.enter {
+            background: linear-gradient(to bottom, #00b09b, #96c93d);
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        /* Code Input */
+        .code-input {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 25px;
+        }
+
+        .code-dots {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .code-dot {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            background: #e9ecef;
+            transition: all 0.3s ease;
+        }
+
+        .code-dot.filled {
+            background: #6a11cb;
+            transform: scale(1.2);
+            box-shadow: 0 0 10px rgba(106, 17, 203, 0.5);
+        }
+
+        .attempts {
+            text-align: center;
+        }
+
+        .attempts p {
+            margin-bottom: 10px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .attempt-bar {
+            width: 100%;
+            height: 10px;
+            background: #e9ecef;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .attempt-progress {
+            height: 100%;
+            background: linear-gradient(to right, #96c93d, #00b09b);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* Instructions */
+        .instructions {
+            background: #e3f2fd;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #2196f3;
+        }
+
+        .instructions h4 {
+            color: #2196f3;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .instructions p {
+            color: #555;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .footer i {
+            color: #ff416c;
+            margin: 0 5px;
+        }
+
+        .footer-note {
+            margin-top: 10px;
+            font-size: 0.8rem;
+            color: #888;
+        }
+
+        /* Animations */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes celebrate {
+            0% { transform: translate(-50%, -50%) scale(0) rotate(0deg); }
+            50% { transform: translate(-50%, -50%) scale(1.1) rotate(5deg); }
+            100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+        }
+
+        .celebrate {
+            animation: celebrate 1s ease;
+        }
+
+        @keyframes confetti {
+            0% { transform: translateY(-100px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(1000px) rotate(720deg); opacity: 0; }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #ff0000;
+            opacity: 0;
+            z-index: 1000;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .locker {
+                width: 250px;
+                height: 300px;
+            }
+            
+            .key {
+                height: 60px;
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .locker {
+                width: 220px;
+                height: 280px;
+            }
+            
+            .keypad-container {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-birthday-cake"></i>   CODE.WITH.HIRA
+            Birthday Locker</h1>
+           
+            <p class="subtitle">Enter the secret code to unlock your birthday surprise!</p>
+        </header>
+
+        <main class="main-content">
+            <div class="locker-container">
+                <!-- Locker Visualization -->
+                <div class="locker" id="locker">
+                    <div class="locker-body">
+                        <div class="locker-door" id="lockerDoor">
+                            <div class="locker-handle"></div>
+                            <div class="locker-lock" id="lockerLock">
+                                <div class="lock-hole"></div>
+                                <div class="lock-body"></div>
+                            </div>
+                            <div class="locker-code-display" id="codeDisplay">----</div>
+                        </div>
+                        <div class="locker-base"></div>
+                    </div>
+                    <div class="locker-shadow"></div>
+                </div>
+
+                <!-- Gift Box (hidden initially) -->
+                <div class="gift-box" id="giftBox">
+                    <div class="gift-lid">
+                        <div class="gift-bow">
+                            <div class="bow-center"></div>
+                            <div class="bow-loop bow-left"></div>
+                            <div class="bow-loop bow-right"></div>
+                            <div class="bow-tail bow-tail-left"></div>
+                            <div class="bow-tail bow-tail-right"></div>
+                        </div>
+                    </div>
+                    <div class="gift-body">
+                        <div class="gift-pattern"></div>
+                    </div>
+                    <div class="gift-message" id="giftMessage">
+                        <h3>THANK YOU!</h3>
+                        <p>You've unlocked your special gift!</p>
+                        <button class="reset-btn" id="resetBtn"><i class="fas fa-redo"></i>   <li><a href="main.html">About Me</a></li></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Keypad -->
+            <div class="keypad-container">
+                <h3><i class="fas fa-keyboard"></i> Enter 4-Digit Code</h3>
+                <p class="hint">Hint: The code is a birthday date (DDMMYY format). Example: ONE JANUARY TWO THOUSAND SIX.</p>
+                
+                <div class="keypad">
+                    <div class="key-row">
+                        <button class="key" data-key="1">1</button>
+                        <button class="key" data-key="2">2</button>
+                        <button class="key" data-key="3">3</button>
+                    </div>
+                    <div class="key-row">
+                        <button class="key" data-key="4">4</button>
+                        <button class="key" data-key="5">5</button>
+                        <button class="key" data-key="6">6</button>
+                    </div>
+                    <div class="key-row">
+                        <button class="key" data-key="7">7</button>
+                        <button class="key" data-key="8">8</button>
+                        <button class="key" data-key="9">9</button>
+                    </div>
+                    <div class="key-row">
+                        <button class="key" data-key="0">0</button>
+                        <button class="key backspace" id="backspaceBtn"><i class="fas fa-backspace"></i></button>
+                        <button class="key enter" id="enterBtn"><i class="fas fa-unlock"></i></button>
+                    </div>
+                </div>
+
+                <div class="code-input">
+                    <div class="code-dots">
+                        <div class="code-dot" id="dot1"></div>
+                        <div class="code-dot" id="dot2"></div>
+                        <div class="code-dot" id="dot3"></div>
+                        <div class="code-dot" id="dot4"></div>
+                    </div>
+                    <div class="attempts">
+                        <p>Attempts: <span id="attemptCount">0</span>/5</p>
+                        <div class="attempt-bar">
+                            <div class="attempt-progress" id="attemptProgress"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructions">
+                    <h4><i class="fas fa-lightbulb"></i> How to Play</h4>
+                    <p>Guess the 4-digit birthday code (DDMM format). Example: 1504 for April 15th.</p>
+                    <p>You have 5 attempts to unlock the gift!</p>
+                    <p><strong>Demo code: MY D.O.B YEAR</strong></p>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>Made with <i class="fas fa-heart"></i> by Code.with.hira | Birthday Locker Project</p>
+            
+    </div>
+
+    <script>
+        // Game Variables
+        let enteredCode = '';
+        let attempts = 0;
+        const maxAttempts = 5;
+        const correctCode = '2006'; // Demo code: 2006 1 January 2006
+        let isUnlocked = false;
+
+        // DOM Elements
+        const codeDisplay = document.getElementById('codeDisplay');
+        const lockerDoor = document.getElementById('lockerDoor');
+        const giftBox = document.getElementById('giftBox');
+        const giftMessage = document.getElementById('giftMessage');
+        const attemptCount = document.getElementById('attemptCount');
+        const attemptProgress = document.getElementById('attemptProgress');
+        const resetBtn = document.getElementById('resetBtn');
+        const backspaceBtn = document.getElementById('backspaceBtn');
+        const enterBtn = document.getElementById('enterBtn');
+        const keys = document.querySelectorAll('.key[data-key]');
+
+        // Initialize game
+        function initGame() {
+            enteredCode = '';
+            attempts = 0;
+            isUnlocked = false;
+            updateCodeDisplay();
+            updateAttempts();
+            lockerDoor.classList.remove('open');
+            giftBox.classList.remove('revealed');
+            giftBox.classList.remove('celebrate');
+            giftMessage.style.opacity = '0';
+            document.querySelectorAll('.code-dot').forEach(dot => {
+                dot.classList.remove('filled');
+            });
+            enableKeypad();
+        }
+
+        // Update the code display
+        function updateCodeDisplay() {
+            let displayCode = enteredCode;
+            while (displayCode.length < 4) {
+                displayCode += '-';
+            }
+            codeDisplay.textContent = displayCode;
+            
+            // Update dots
+            document.querySelectorAll('.code-dot').forEach((dot, index) => {
+                if (index < enteredCode.length) {
+                    dot.classList.add('filled');
+                } else {
+                    dot.classList.remove('filled');
+                }
+            });
+        }
+
+        // Update attempts display
+        function updateAttempts() {
+            attemptCount.textContent = attempts;
+            const progressPercentage = (attempts / maxAttempts) * 100;
+            attemptProgress.style.width = `${progressPercentage}%`;
+            
+            // Change color based on attempts
+            if (attempts >= maxAttempts - 1) {
+                attemptProgress.style.background = 'linear-gradient(to right, #ff5e62, #ff9966)';
+            } else if (attempts >= maxAttempts - 2) {
+                attemptProgress.style.background = 'linear-gradient(to right, #ff9966, #ffcc00)';
+            } else {
+                attemptProgress.style.background = 'linear-gradient(to right, #96c93d, #00b09b)';
+            }
+        }
+
+        // Add a digit to the code
+        function addDigit(digit) {
+            if (enteredCode.length < 4 && !isUnlocked) {
+                enteredCode += digit;
+                updateCodeDisplay();
+                playSound('click');
+            }
+        }
+
+        // Remove last digit from the code
+        function backspace() {
+            if (enteredCode.length > 0 && !isUnlocked) {
+                enteredCode = enteredCode.slice(0, -1);
+                updateCodeDisplay();
+                playSound('click');
+            }
+        }
+
+        // Check the entered code
+        function checkCode() {
+            if (enteredCode.length !== 4 || isUnlocked) return;
+            
+            attempts++;
+            updateAttempts();
+            
+            if (enteredCode === correctCode) {
+                // Correct code
+                unlockLocker();
+                playSound('unlock');
+            } else {
+                // Incorrect code
+                shakeLocker();
+                playSound('error');
+                
+                if (attempts >= maxAttempts) {
+                    // Max attempts reached
+                    setTimeout(() => {
+                        alert(`Game Over! The correct code was ${correctCode} (1 January 2006). Click "Try Again" to play again.`);
+                        disableKeypad();
+                    }, 500);
+                } else {
+                    // Clear for next attempt
+                    setTimeout(() => {
+                        enteredCode = '';
+                        updateCodeDisplay();
+                    }, 800);
+                }
+            }
+        }
+
+        // Unlock the locker and reveal gift
+        function unlockLocker() {
+            isUnlocked = true;
+            disableKeypad();
+            
+            // Animate locker opening
+            setTimeout(() => {
+                lockerDoor.classList.add('open');
+            }, 500);
+            
+            // Reveal gift after delay
+            setTimeout(() => {
+                giftBox.classList.add('revealed');
+                giftBox.classList.add('celebrate');
+                playSound('celebration');
+                createConfetti();
+            }, 1500);
+            
+            // Show message
+            setTimeout(() => {
+                giftMessage.style.opacity = '1';
+                giftMessage.style.transform = 'translateY(0)';
+            }, 2500);
+        }
+
+        // Shake locker animation for wrong code
+        function shakeLocker() {
+            lockerDoor.classList.add('shake');
+            setTimeout(() => {
+                lockerDoor.classList.remove('shake');
+            }, 500);
+        }
+
+        // Create confetti animation
+        function createConfetti() {
+            const colors = ['#ff416c', '#ff4b2b', '#36D1DC', '#5B86E5', '#6a11cb', '#2575fc', '#ffcc00', '#96c93d'];
+            
+            for (let i = 0; i < 150; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
+                confetti.style.opacity = '1';
+                
+                document.body.appendChild(confetti);
+                
+                // Animation
+                const animation = confetti.animate([
+                    { transform: `translateY(-100px) rotate(0deg)`, opacity: 1 },
+                    { transform: `translateY(${window.innerHeight + 100}px) rotate(${Math.random() * 720}deg)`, opacity: 0 }
+                ], {
+                    duration: Math.random() * 3000 + 2000,
+                    delay: Math.random() * 1000
+                });
+                
+                // Remove element after animation
+                animation.onfinish = () => {
+                    confetti.remove();
+                };
+            }
+        }
+
+        // Play sound effects
+        function playSound(type) {
+            try {
+                // Create audio context for sound generation
+                const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                
+                if (type === 'click') {
+                    // Click sound
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.value = 800;
+                    oscillator.type = 'sine';
+                    
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.1);
+                }
+                else if (type === 'unlock') {
+                    // Unlock sound (rising tone)
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.setValueAtTime(300, audioContext.currentTime);
+                    oscillator.frequency.exponentialRampToValueAtTime(800, audioContext.currentTime + 0.5);
+                    oscillator.type = 'sine';
+                    
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.5);
+                }
+                else if (type === 'error') {
+                    // Error sound
+                    const oscillator = audioContext.createOscillator();
+                    const gainNode = audioContext.createGain();
+                    
+                    oscillator.connect(gainNode);
+                    gainNode.connect(audioContext.destination);
+                    
+                    oscillator.frequency.setValueAtTime(200, audioContext.currentTime);
+                    oscillator.type = 'sawtooth';
+                    
+                    gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                    
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.3);
+                }
+                else if (type === 'celebration') {
+                    // Celebration sound (fanfare)
+                    for (let i = 0; i < 5; i++) {
+                        setTimeout(() => {
+                            const oscillator = audioContext.createOscillator();
+                            const gainNode = audioContext.createGain();
+                            
+                            oscillator.connect(gainNode);
+                            gainNode.connect(audioContext.destination);
+                            
+                            const notes = [523.25, 659.25, 783.99, 1046.50, 1318.51];
+                            oscillator.frequency.value = notes[i];
+                            oscillator.type = 'triangle';
+                            
+                            gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.3);
+                            
+                            oscillator.start(audioContext.currentTime);
+                            oscillator.stop(audioContext.currentTime + 0.3);
+                        }, i * 150);
+                    }
+                }
+            } catch (e) {
+                // Audio context not supported, continue without sound
+                console.log("Audio not supported in this environment");
+            }
+        }
+
+        // Enable keypad
+        function enableKeypad() {
+            keys.forEach(key => {
+                key.disabled = false;
+                key.style.opacity = '1';
+                key.style.cursor = 'pointer';
+            });
+            backspaceBtn.disabled = false;
+            backspaceBtn.style.opacity = '1';
+            backspaceBtn.style.cursor = 'pointer';
+            enterBtn.disabled = false;
+            enterBtn.style.opacity = '1';
+            enterBtn.style.cursor = 'pointer';
+        }
+
+        // Disable keypad
+        function disableKeypad() {
+            keys.forEach(key => {
+                key.disabled = true;
+                key.style.opacity = '0.6';
+                key.style.cursor = 'not-allowed';
+            });
+            backspaceBtn.disabled = true;
+            backspaceBtn.style.opacity = '0.6';
+            backspaceBtn.style.cursor = 'not-allowed';
+            enterBtn.disabled = true;
+            enterBtn.style.opacity = '0.6';
+            enterBtn.style.cursor = 'not-allowed';
+        }
+
+        // Keyboard support
+        document.addEventListener('keydown', (e) => {
+            if (e.key >= '0' && e.key <= '9') {
+                addDigit(e.key);
+            } else if (e.key === 'Backspace') {
+                backspace();
+            } else if (e.key === 'Enter') {
+                checkCode();
+            }
+        });
+
+        // Event Listeners
+        keys.forEach(key => {
+            key.addEventListener('click', () => {
+                addDigit(key.getAttribute('data-key'));
+            });
+        });
+
+        backspaceBtn.addEventListener('click', backspace);
+        enterBtn.addEventListener('click', checkCode);
+        resetBtn.addEventListener('click', initGame);
+
+        // Initialize the game
+        initGame();
+    </script>
+</body>
+</html>
